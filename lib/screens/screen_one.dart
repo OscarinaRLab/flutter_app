@@ -13,7 +13,7 @@ class ScreenOne extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ScreenTwo()),  // Navegar a la pantalla 2
+              MaterialPageRoute(builder: (context) => const ScreenTwo()),  // Navegar a la pantalla 2
             );
           },
           child: const Text("Ir a Pantalla 2"),
