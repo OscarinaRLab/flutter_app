@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_test_3/screens/screen_three.dart';
 
 class ScreenTwo extends StatelessWidget {
-  const ScreenTwo({super.key});
+  final List<String> items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6',
+  ];
+
+  ScreenTwo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Pantalla 2")),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ScreenThree()),  // Navegar a la pantalla 3
-            );
-          },
-          child: const Text("Ir a Pantalla 3"),
-        ),
+      appBar: AppBar(title: const Text("Lista de Ítems")),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text(items[index]),
+              onTap: () {
+                // Acción al seleccionar un item (puedes agregar detalles si lo deseas)
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Seleccionaste ${items[index]}')));
+              },
+            ),
+          );
+        },
       ),
     );
   }
