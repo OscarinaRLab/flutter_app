@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pantalla Principal"),
+        title: const Text("Cocinando contigo ♡"),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'favorites_screen.dart';
 
 class ScreenOne extends StatefulWidget {
@@ -11,61 +10,26 @@ class ScreenOne extends StatefulWidget {
 }
 
 class _ScreenOneState extends State<ScreenOne> {
-  final List<String> initialImageUrls = [
-    "https://via.placeholder.com/150/92c952",
-    "https://via.placeholder.com/150/771796",
-    "https://via.placeholder.com/150/24f355",
-    "https://via.placeholder.com/150/d32776",
-    "https://via.placeholder.com/150/f66b97",
-    "https://via.placeholder.com/150/56a8c2",
+  // Lista de rutas locales para las imágenes
+  final List<String> localImagePaths = [
+    "assets/images/image1.jpg",
+    "assets/images/image2.jpg",
+    "assets/images/image3.jpg",
+    "assets/images/image4.jpg",
+    "assets/images/image5.jpg",
+    "assets/images/image6.jpg",
   ];
 
-  List<String> validImageUrls = [];
   final Set<int> favoriteIndices = {};
-
-  @override
-  void initState() {
-    super.initState();
-    validateImageUrls();
-  }
-
-  Future<void> validateImageUrls() async {
-    List<String> validUrls = [];
-    for (String url in initialImageUrls) {
-      if (await isImageUrlValid(url)) {
-        validUrls.add(url);
-      }
-    }
-
-    if (mounted) {
-      setState(() {
-        validImageUrls = validUrls;
-      });
-    }
-  }
-
-  Future<bool> isImageUrlValid(String url) async {
-    try {
-      final response = await http.head(Uri.parse(url));
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Galería de Imágenes"),
-        backgroundColor: Colors.blueAccent,
+        title: const Text("Recetas que he hecho"),
+        backgroundColor: const Color.fromARGB(255, 210, 81, 22),
       ),
-      body: validImageUrls.isEmpty
+      body: localImagePaths.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
               padding: const EdgeInsets.all(10),
@@ -74,18 +38,18 @@ class _ScreenOneState extends State<ScreenOne> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
-              itemCount: validImageUrls.length,
+              itemCount: localImagePaths.length,
               itemBuilder: (context, index) {
                 final isFavorite = favoriteIndices.contains(index);
                 return Stack(
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        validImageUrls[index],
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
+                      child: Image.asset(
+                        localImagePaths[index],
+                        fit: BoxFit.cover, // Ajusta y recorta la imagen
+                        width: 170, // Redimensiona el ancho
+                        height: 150, // Redimensiona la altura
                       ),
                     ),
                     Positioned(
@@ -118,14 +82,14 @@ class _ScreenOneState extends State<ScreenOne> {
             MaterialPageRoute(
               builder: (context) => FavoritesScreen(
                 favorites: favoriteIndices
-                    .map((index) => validImageUrls[index])
+                    .map((index) => localImagePaths[index])
                     .toList(),
               ),
             ),
           );
         },
-        backgroundColor: Colors.blueAccent,
-        child: const Icon(Icons.favorite),
+        backgroundColor: const Color.fromARGB(255, 233, 21, 169),
+        child: const Icon(Icons.favorite_border),
       ),
     );
   }

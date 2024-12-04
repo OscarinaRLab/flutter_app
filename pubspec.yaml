@@ -11,7 +11,6 @@ dependencies:
     sdk: flutter
   firebase_auth: ^4.16.0
   firebase_core: ^2.10.0
-  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +19,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/image1.jpg
+    - assets/images/image2.jpg
+    - assets/images/image3.jpg
+    - assets/images/image4.jpg
+    - assets/images/image5.jpg
+    - assets/images/image6.jpg
