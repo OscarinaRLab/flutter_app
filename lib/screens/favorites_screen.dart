@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FavoritesScreen extends StatelessWidget {
   final List<String> favorites;
 
-  const FavoritesScreen({Key? key, required this.favorites}) : super(key: key);
+  const FavoritesScreen({super.key, required this.favorites});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class FavoritesScreen extends StatelessWidget {
       body: favorites.isEmpty
           ? const Center(
               child: Text(
-                "No tienes imágenes favoritas aún.",
+                "No hay favoritos aún.",
                 style: TextStyle(fontSize: 18),
               ),
             )
@@ -23,15 +23,21 @@ class FavoritesScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               itemCount: favorites.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      favorites[index],
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: 150,
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        favorites[index],
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    title: Text(
+                      "Receta favorita # ${index + 1}",
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 );
@@ -40,3 +46,4 @@ class FavoritesScreen extends StatelessWidget {
     );
   }
 }
+
