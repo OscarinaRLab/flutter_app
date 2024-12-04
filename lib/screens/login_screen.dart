@@ -9,7 +9,6 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   void _login(BuildContext context) {
-    // Aquí iría la lógica de autenticación con Firebase.
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const HomeScreen()),
